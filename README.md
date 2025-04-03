@@ -1,1 +1,2 @@
-# This project is a weather-app.
+# weather-app
+This project is a weather-app.
