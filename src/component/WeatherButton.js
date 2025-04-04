@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 const WeatherButton = ({cities, setCity, getCurrentLocation, city}) => {
     console.log("cities",cities)
   return (
-    <div>
+    <div className='button-box'>
           <Button className='button crayon-button' variant={`${city == ''? "danger":"warning"}`} onClick={()=>{getCurrentLocation(); setCity('')}}>CurrentLocation</Button>
           {cities.map((item, index)=>(
               <Button className='button crayon-button'  variant={`${city == item? "danger":"warning"}`}key={index} onClick={()=>{setCity(item)}}>{item}</Button>
