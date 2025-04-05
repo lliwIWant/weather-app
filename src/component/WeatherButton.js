@@ -1,13 +1,28 @@
 import React from 'react'
 import { Button } from 'react-bootstrap';
 
-const WeatherButton = ({cities, setCity, getCurrentLocation, city}) => {
+const WeatherButton = ({cities, setCity, getCurrentLocation, city, flag, darkMode}) => {
     console.log("cities",cities)
+
   return (
     <div className='button-box'>
-          <Button className='button crayon-button' variant={`${city == ''? "danger":"warning"}`} onClick={()=>{getCurrentLocation(); setCity('')}}>CurrentLocation</Button>
+
+          {flag ?(<Button className='button crayon-button' 
+          variant={`${darkMode?(city == ''?"outline-danger":"outline-warning"):(city == ''? "danger":"warning")}`} 
+          onClick={()=>{getCurrentLocation(); setCity('')}}>Current Location</Button>
+        ):(
+          <Button className='button crayon-button' 
+          variant={`${darkMode?(city == ''?"outline-danger":"outline-warning"):(city == ''? "danger":"warning")}`} 
+          onClick={()=>{getCurrentLocation(); setCity('')}}>Oops!😢</Button>
+        ) }        
           {cities.map((item, index)=>(
-              <Button className='button crayon-button'  variant={`${city == item? "danger":"warning"}`}key={index} onClick={()=>{setCity(item)}}>{item}</Button>
+              <Button className='button crayon-button'  
+                    variant={`${darkMode?(city == item?"outline-danger":"outline-warning"):(city == item? "danger":"warning")}`}key={index} 
+                    onClick={()=>{
+                      setCity(item);
+                    }}>
+                      {item}
+              </Button>
           ))} 
     </div>
   )

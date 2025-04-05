@@ -76,6 +76,11 @@ body{
 }
 
 
+.warn{
+  font-size: 18px;
+  width: 250px;
+  height: 50px;
+}
 
 
 
@@ -83,7 +88,7 @@ body{
 body.dark{
   /* color: white; */
   background-image: url("https://media1.tenor.com/m/WPqFfKvgIbUAAAAd/stars-train.gif");
-  
+  background-color: #4D46A0;
   filter: brightness(120%);
 }
 

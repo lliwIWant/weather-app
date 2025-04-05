@@ -15,25 +15,34 @@ import ClipLoader from "react-spinners/ClipLoader";
 function App() {
   //API KEY
   const API_KEY = process.env.REACT_APP_API_KEY;
-  console.log("API_KEY",API_KEY);
+  // console.log("API_KEY",API_KEY);
 
   const[weather, setWeather] = useState(null);
   const [city, setCity] = useState('');
   const cities=['paris','new york', 'tokyo','seoul'];
   const [loading, setLoading] = useState(false);
+  const [flag, setFlag] = useState(false);
   //darkMode
   const [darkMode, setDarkMode] = useState(false);
-
+  
   const getCurrentLocation = ()=>{
     navigator.geolocation.getCurrentPosition((position)=>{
     let lat = position.coords.latitude
     let lon = position.coords.longitude
     console.log("현재 위치",lat, lon);
     getWeatherByCurrentLocation(lat, lon);
-    });
+    setFlag(true);
+    },
+    (err) => {
+      console.log(err);
+      setFlag(false);
+      setWeather(null);
+    }
+  );
   }
 
   const getWeatherByCurrentLocation = async(lat, lon)=>{
+    console.log("getWeatherByCurrentLocation");
     let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
     setLoading(true);
     let response = await fetch(url);
@@ -41,6 +50,7 @@ function App() {
     console.log("data",data);
     setWeather(data);
     setLoading(false);
+    
   }
 
 
@@ -98,7 +108,7 @@ function App() {
       ):(
         <div className='container'>
           <WeatherBox weather={weather}/>
-          <WeatherButton cities={cities} setCity={setCity} getCurrentLocation={getCurrentLocation} city={city} weather={weather} />
+          <WeatherButton cities={cities} setCity={setCity} getCurrentLocation={getCurrentLocation} city={city} flag={flag} darkMode={darkMode} />
         </div>
       )}
 
