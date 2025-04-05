@@ -24,3 +24,4 @@ yarn-error.log*
 
 # 환경변수
 .env
+yarn.lock
