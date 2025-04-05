@@ -21,6 +21,8 @@ function App() {
   const [city, setCity] = useState('');
   const cities=['paris','new york', 'tokyo','seoul'];
   const [loading, setLoading] = useState(false);
+  //darkMode
+  const [darkMode, setDarkMode] = useState(false);
 
   const getCurrentLocation = ()=>{
     navigator.geolocation.getCurrentPosition((position)=>{
@@ -58,11 +60,37 @@ function App() {
     }else{
       getWeatherByCity();
     }
+
   },[city])
 
+
+  // darkMode
+  useEffect(() => {
+    if (darkMode) {
+      document.querySelector(".toggle").classList.add("dark");
+      document.querySelector(".toggle>div").classList.add("dark");
+      document.body.classList.add('dark');
+      console.log("darkMode",darkMode);
+    } else {
+      document.querySelector(".toggle").classList.remove("dark");
+      document.querySelector(".toggle>div").classList.remove("dark");
+      document.body.classList.remove('dark');
+      console.log("darkMode",darkMode);
+    }
+  }, [darkMode]);
   
   return (
     <div>
+          <div className="app-button">
+            {/* <h1>{darkMode ? '🌙 다크 모드' : '☀️ 라이트 모드'}</h1>
+              <button onClick={() => setDarkMode(prev => !prev)}>
+              {darkMode ? '라이트 모드로 전환' : '다크 모드로 전환'}
+            </button> */}
+            <div className='toggle'>
+              <div onClick={() => setDarkMode(prev => !prev)}></div>
+            </div>
+            {/* <h6>{darkMode ? '다크 모드' : '라이트 모드'}</h6> */}
+          </div>
       {loading?(
         <div className='container'>
           <ClipLoader color="#f88c6b" loading={loading} size={150}/>
@@ -70,7 +98,7 @@ function App() {
       ):(
         <div className='container'>
           <WeatherBox weather={weather}/>
-          <WeatherButton cities={cities} setCity={setCity} getCurrentLocation={getCurrentLocation} city={city} />
+          <WeatherButton cities={cities} setCity={setCity} getCurrentLocation={getCurrentLocation} city={city} weather={weather} />
         </div>
       )}
 

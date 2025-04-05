@@ -1,5 +1,5 @@
 body{
-  background: url("https://i.pinimg.com/736x/ce/76/d5/ce76d5c7578a01d34cb35b8b7081ecb4.jpg");
+  background-image: url("https://i.pinimg.com/736x/ce/76/d5/ce76d5c7578a01d34cb35b8b7081ecb4.jpg");
   background-color: #60C0EB;
   height: 100vh;
   width:  100vw;
@@ -10,6 +10,9 @@ body{
   padding:0;
   margin: 0;
   font-family: 'Cafe24Decoschool';
+
+  transition: background-image 0.3s ease-in-out;
+  transition: filter 0.3s ease-in-out;
 }
 
 @font-face {
@@ -23,25 +26,75 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  align-content: space-around;
-  height: 100vh;
+  height: 90vh;
   flex-direction: column;
 }
 .weather-box{
   border-radius: 10px;
-  padding: 80px 76px 100px;
+  padding: 80px 130px  150px;
   font-family: 'Cafe24Decoschool', sans-serif;
 
   background-color: rgba(255, 255, 255, 0.696);
   background: url("https://cdn.pixabay.com/photo/2020/09/30/14/45/paper-5615994_1280.png");
   background-size: contain;
   background-repeat: no-repeat;
+  background-position: center;
 }
 
 .button{
   margin: 0 5px;
   font-family: 'Cafe24Decoschool', sans-serif !important;
 }
+
+.app-button{
+ display: flex;
+ flex-direction: column;  
+ align-items: flex-end;
+ padding-right: 20px;
+}
+.toggle{
+  width: 60px;
+  height: 30px;
+  background-color: rgb(108, 192, 72);
+  border: 2px solid #ccc;
+  border-radius: 50px;
+  margin: 10px;
+  position: relative;
+
+  transition: background-color 0.3s ease-in-out;
+}
+.toggle>div{
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  background-color: white;
+  margin: 1px 2px;
+  cursor: pointer;
+  position: absolute;
+
+  transition: transform 0.3s ease-in-out;
+}
+
+
+
+
+
+/* 다크모드 */
+body.dark{
+  /* color: white; */
+  background-image: url("https://media1.tenor.com/m/WPqFfKvgIbUAAAAd/stars-train.gif");
+  
+  filter: brightness(120%);
+}
+
+.toggle.dark{
+  background-color: rgb(12, 12, 41);
+  border: 2px solid #ccc;
+}
+.toggle>div.dark{
+  transform: translateX(28px);
+}
+
 
 /* 모바일 */
 @media screen and (max-width: 768px) {
@@ -59,5 +112,11 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+  .container{
+    height: 80vh;;
+  }
+  .weather-box{
+    padding: 80px 76px 70px;
   }
 }
